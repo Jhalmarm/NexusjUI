@@ -10,6 +10,18 @@ Looks like a system from a **2060 movie**. Plugs into **any** stack: plain HTML,
 
 > Version: **0.1.0 MVP** · Repo: [Jhalmarm/NexusjUI](https://github.com/Jhalmarm/NexusjUI)
 
+### Live demo
+
+**https://jhalmarm.github.io/NexusjUI/**
+
+| Page | URL |
+|------|-----|
+| Home | [/demo/](https://jhalmarm.github.io/NexusjUI/demo/) |
+| Login | [/demo/login.html](https://jhalmarm.github.io/NexusjUI/demo/login.html) |
+| Dashboard | [/demo/dashboard.html](https://jhalmarm.github.io/NexusjUI/demo/dashboard.html) |
+| Media / Video | [/demo/media.html](https://jhalmarm.github.io/NexusjUI/demo/media.html) |
+| Components | [/demo/components.html](https://jhalmarm.github.io/NexusjUI/demo/components.html) |
+
 ---
 
 ## Quick start
