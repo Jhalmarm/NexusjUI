@@ -1,0 +1,441 @@
+/* ==========================================================================
+   NEXUS UI — Video player (inline glass + floating stage)
+   Local <video> and embed iframes (YouTube, Vimeo, …)
+   ========================================================================== */
+
+/* —— Inline stage —— */
+.nx-video {
+  --nx-video-radius: var(--nx-radius-md);
+  --nx-video-glass: 0.78;
+  position: relative;
+  width: 100%;
+  border-radius: var(--nx-video-radius);
+  overflow: hidden;
+  background: rgba(4, 8, 18, 0.65);
+  border: 1px solid var(--nx-border);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 12px 40px rgba(0, 0, 0, 0.35);
+  isolation: isolate;
+}
+
+.nx-video-glass {
+  background: color-mix(in srgb, var(--nx-bg-panel) calc(var(--nx-video-glass) * 100%), transparent);
+  border-color: var(--nx-border-strong);
+  backdrop-filter: blur(var(--nx-blur-md)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--nx-blur-md)) saturate(140%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    var(--nx-glow-sm),
+    0 16px 48px rgba(0, 0, 0, 0.4);
+}
+
+.nx-video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background:
+    radial-gradient(ellipse at center, color-mix(in srgb, var(--nx-accent) 8%, transparent), transparent 65%),
+    #05070f;
+}
+
+.nx-video-frame.is-portrait {
+  aspect-ratio: 9 / 16;
+  max-width: 320px;
+  margin-inline: auto;
+}
+
+.nx-video-frame.is-square {
+  aspect-ratio: 1 / 1;
+  max-width: 480px;
+  margin-inline: auto;
+}
+
+.nx-video video,
+.nx-video iframe,
+.nx-video-frame video,
+.nx-video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  background: #000;
+  /* Slight glass look on the media itself */
+  opacity: 0.94;
+}
+
+.nx-video-glass video,
+.nx-video-glass iframe {
+  opacity: 0.9;
+  mix-blend-mode: normal;
+}
+
+/* Soft vignette overlay (doesn't block controls much) */
+.nx-video-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.35);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--nx-accent) 6%, transparent) 0%,
+    transparent 28%,
+    transparent 72%,
+    rgba(0, 0, 0, 0.25) 100%
+  );
+  opacity: 0.7;
+  z-index: 1;
+}
+
+/* Corner HUD marks */
+.nx-video-hud {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.nx-video-hud::before,
+.nx-video-hud::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: color-mix(in srgb, var(--nx-accent) 70%, transparent);
+  border-style: solid;
+  opacity: 0.75;
+}
+
+.nx-video-hud::before {
+  top: 8px;
+  left: 8px;
+  border-width: 2px 0 0 2px;
+}
+
+.nx-video-hud::after {
+  bottom: 8px;
+  right: 8px;
+  border-width: 0 2px 2px 0;
+}
+
+.nx-video-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--nx-space-3);
+  padding: 0.65rem 0.85rem;
+  border-top: 1px solid var(--nx-border);
+  background: color-mix(in srgb, var(--nx-bg-deep) 45%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.nx-video-title {
+  margin: 0;
+  font-family: var(--nx-font-display);
+  font-size: var(--nx-text-sm);
+  letter-spacing: var(--nx-tracking-wide);
+  color: var(--nx-text);
+}
+
+.nx-video-sub {
+  margin: 0.15rem 0 0;
+  font-family: var(--nx-font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--nx-text-muted);
+}
+
+/* —— Floating player shell —— */
+.nx-video-float-host {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--nx-z-modal) + 20);
+  pointer-events: none;
+}
+
+.nx-video-float {
+  --nx-video-float-alpha: 0.58;
+  position: fixed;
+  z-index: calc(var(--nx-z-modal) + 21);
+  /* Always start viewport-centered (JS may override with pixel left/top while dragging) */
+  left: 50%;
+  top: 50%;
+  right: auto;
+  bottom: auto;
+  width: min(720px, calc(100vw - 2rem));
+  max-height: calc(100dvh - 2rem);
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--nx-radius-lg);
+  border: 1px solid color-mix(in srgb, var(--nx-border-strong) 80%, transparent);
+  background: color-mix(in srgb, var(--nx-bg-elevated) calc(var(--nx-video-float-alpha) * 100%), transparent);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  box-shadow:
+    var(--nx-glow-md),
+    0 24px 80px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  pointer-events: auto;
+  opacity: 0;
+  /* Use transform ONLY for open animation + centering — drag uses left/top pixels + transform none */
+  transform: translate(-50%, -50%) scale(0.94);
+  transition:
+    opacity var(--nx-dur) var(--nx-ease),
+    transform var(--nx-dur) var(--nx-ease-out),
+    width var(--nx-dur) var(--nx-ease),
+    border-radius var(--nx-dur) var(--nx-ease),
+    background var(--nx-dur) var(--nx-ease);
+  will-change: transform, opacity;
+  /* kill separate translate/scale props that fight drag */
+  translate: none;
+  scale: none;
+}
+
+.nx-video-float.is-open {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Pixel-positioned after user drag (or during drag) */
+.nx-video-float.is-placed {
+  transform: none;
+}
+
+.nx-video-float.is-placed.is-open {
+  transform: none;
+}
+
+.nx-video-float.is-dragging {
+  transition: none !important;
+  cursor: grabbing;
+  user-select: none;
+  opacity: 0.92;
+}
+
+.nx-video-float.is-minimized {
+  width: min(320px, calc(100vw - 1.5rem));
+}
+
+.nx-video-float.is-minimized .nx-video-float-body {
+  display: none;
+}
+
+.nx-video-float.is-maximized {
+  width: min(1100px, calc(100vw - 2rem));
+  left: 50% !important;
+  top: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: translate(-50%, -50%) scale(1) !important;
+}
+
+.nx-video-float.is-maximized.is-placed {
+  transform: translate(-50%, -50%) scale(1) !important;
+}
+
+.nx-video-float-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.7rem;
+  cursor: grab;
+  background: color-mix(in srgb, var(--nx-bg-deep) 35%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--nx-border) 80%, transparent);
+  user-select: none;
+  touch-action: none;
+  -webkit-user-select: none;
+}
+
+.nx-video-float-bar:active {
+  cursor: grabbing;
+}
+
+.nx-video-float-bar .nx-video-title {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.8rem;
+}
+
+.nx-video-float-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--nx-accent);
+  box-shadow: 0 0 10px var(--nx-accent);
+  flex-shrink: 0;
+  animation: nx-blink 1.6s ease-in-out infinite;
+}
+
+.nx-video-float-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.nx-video-float-actions button {
+  appearance: none;
+  width: 30px;
+  height: 28px;
+  border-radius: var(--nx-radius-xs);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--nx-text-muted);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-family: var(--nx-font-mono);
+  font-size: 0.85rem;
+  line-height: 1;
+  transition: color var(--nx-dur-fast) var(--nx-ease), background var(--nx-dur-fast) var(--nx-ease), border-color var(--nx-dur-fast) var(--nx-ease);
+}
+
+.nx-video-float-actions button:hover {
+  color: var(--nx-accent);
+  background: color-mix(in srgb, var(--nx-accent) 12%, transparent);
+  border-color: color-mix(in srgb, var(--nx-accent) 30%, transparent);
+}
+
+.nx-video-float-actions button.nx-video-close:hover {
+  color: var(--nx-danger);
+  background: color-mix(in srgb, var(--nx-danger) 12%, transparent);
+  border-color: color-mix(in srgb, var(--nx-danger) 35%, transparent);
+}
+
+.nx-video-float-body {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.nx-video-float-body .nx-video-frame {
+  border-radius: 0;
+}
+
+.nx-video-float-body .nx-video-frame::after {
+  opacity: 0.45;
+}
+
+/* Dim page slightly when maximized */
+.nx-video-float-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--nx-z-modal) + 19);
+  background: rgba(2, 4, 12, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--nx-dur) var(--nx-ease), visibility var(--nx-dur) var(--nx-ease);
+}
+
+.nx-video-float-scrim.is-on {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Thumbnail / launcher cards */
+button.nx-video-card,
+.nx-video-card {
+  appearance: none;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform var(--nx-dur) var(--nx-ease), box-shadow var(--nx-dur) var(--nx-ease), border-color var(--nx-dur) var(--nx-ease);
+}
+
+.nx-video-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--nx-border-strong);
+  box-shadow: var(--nx-glow-sm), 0 16px 40px rgba(0, 0, 0, 0.4);
+}
+
+.nx-video-card .nx-video-frame {
+  pointer-events: none;
+}
+
+.nx-video-play {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.nx-video-play span {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--nx-border-strong);
+  background: color-mix(in srgb, var(--nx-bg-elevated) 55%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: var(--nx-glow-sm);
+  color: var(--nx-accent);
+  font-size: 1.1rem;
+  padding-left: 3px;
+}
+
+.nx-video-card:hover .nx-video-play span {
+  scale: 1.06;
+  box-shadow: var(--nx-glow-md);
+}
+
+/* Poster placeholder when no thumb */
+.nx-video-poster {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--nx-accent) 18%, transparent), transparent 50%),
+    linear-gradient(225deg, color-mix(in srgb, var(--nx-accent-2) 14%, transparent), #070b14 60%);
+  display: grid;
+  place-items: center;
+}
+
+.nx-video-poster .nx-mono {
+  color: var(--nx-text-muted);
+  font-size: var(--nx-text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+  .nx-video-float {
+    width: calc(100vw - 1.25rem);
+  }
+
+  .nx-video-float.is-maximized {
+    width: calc(100vw - 1rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nx-video-float {
+    transition: opacity 0.01ms !important;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .nx-video-float.is-placed {
+    transform: none;
+  }
+}

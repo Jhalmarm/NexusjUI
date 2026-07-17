@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es" data-nx-auto>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEXUS — Systems</title>
+  <link rel="stylesheet" href="../css/nexus.css" />
+</head>
+<body data-nx-fx="scanlines grid noise particles vignette" data-nx-audio="on">
+  <div class="nx-app nx-view">
+    <header class="nx-topbar">
+      <a class="nx-brand" href="index.html">
+        <span class="nx-brand-mark"><span>NX</span></span>
+        <span class="nx-brand-text">Systems</span>
+      </a>
+      <span class="nx-live">Diagnostics</span>
+      <div class="nx-spacer"></div>
+      <button class="nx-btn nx-btn-sm nx-btn-danger" type="button" onclick="NexusUI.toast('Emergency protocol armed','warning')">EMERGENCY</button>
+    </header>
+
+    <nav class="nx-side-nav" aria-label="Navegación lateral">
+      <a href="index.html" data-tip="Inicio" class="nx-nav-link" aria-label="Inicio">
+        <svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg>
+      </a>
+      <a href="dashboard.html" data-tip="Dashboard" class="nx-nav-link" aria-label="Dashboard">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+      </a>
+      <a href="systems.html" data-tip="Sistemas" class="nx-nav-link" aria-label="Sistemas">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2.2 2.2M16.8 16.8 19 19M19 5l-2.2 2.2M5 19l2.2-2.2"/></svg>
+      </a>
+      <a href="components.html" data-tip="Componentes" class="nx-nav-link" aria-label="Componentes">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+      </a>
+    </nav>
+
+    <main class="nx-main has-side-nav">
+      <div class="nx-container">
+        <nav class="nx-breadcrumb nx-reveal">
+          <a href="index.html">Nexus</a>
+          <span class="nx-sep">/</span>
+          <span aria-current="page">Systems</span>
+        </nav>
+
+        <div class="nx-reveal nx-mb-6">
+          <p class="nx-label">Configuration matrix</p>
+          <h1 class="nx-h2 nx-display" style="margin:0">Control holográfico</h1>
+          <p class="nx-muted nx-mt-2">Ajusta el aspecto y el motor de transición del sistema NEXUS.</p>
+        </div>
+
+        <div class="nx-grid nx-grid-2">
+          <section class="nx-card nx-border-glow nx-reveal nx-reveal-delay-1">
+            <h2 class="nx-card-title">Theme engine</h2>
+            <p class="nx-card-subtitle nx-mb-4">Paletas de película · persistentes</p>
+            <div class="nx-stack">
+              <div class="nx-row" style="justify-content:space-between">
+                <span>Cyber Cyan <span class="nx-dim">(default)</span></span>
+                <button class="nx-btn nx-btn-sm" data-nx-set-theme="cyber" type="button">Apply</button>
+              </div>
+              <div class="nx-row" style="justify-content:space-between">
+                <span>Void Purple</span>
+                <button class="nx-btn nx-btn-sm" data-nx-set-theme="void" type="button">Apply</button>
+              </div>
+              <div class="nx-row" style="justify-content:space-between">
+                <span>Ice Horizon</span>
+                <button class="nx-btn nx-btn-sm" data-nx-set-theme="ice" type="button">Apply</button>
+              </div>
+              <div class="nx-row" style="justify-content:space-between">
+                <span>Ember Core</span>
+                <button class="nx-btn nx-btn-sm" data-nx-set-theme="ember" type="button">Apply</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="nx-card nx-frame nx-reveal nx-reveal-delay-2">
+            <h2 class="nx-card-title">Scene transitions</h2>
+            <p class="nx-card-subtitle nx-mb-4">Cambia y salta de página</p>
+            <div class="nx-transition-picker nx-mb-4">
+              <button type="button" data-nx-set-transition="portal">Portal</button>
+              <button type="button" data-nx-set-transition="fade-depth">Fade Depth</button>
+              <button type="button" data-nx-set-transition="cube">Cube</button>
+              <button type="button" data-nx-set-transition="flip">Flip</button>
+              <button type="button" data-nx-set-transition="glitch">Glitch</button>
+            </div>
+            <div class="nx-row">
+              <a class="nx-btn nx-btn-primary" href="dashboard.html">Jump to Core</a>
+              <a class="nx-btn nx-btn-ghost" href="index.html">Jump Home</a>
+            </div>
+          </section>
+
+          <section class="nx-card nx-reveal nx-reveal-delay-3">
+            <h2 class="nx-card-title">System toggles</h2>
+            <div class="nx-stack nx-mt-4">
+              <div class="nx-row" style="justify-content:space-between">
+                <div>
+                  <div>Particle field</div>
+                  <div class="nx-dim nx-mono" style="font-size:0.75rem">Ambient dust + links</div>
+                </div>
+                <label class="nx-switch"><input type="checkbox" checked disabled /><span></span></label>
+              </div>
+              <div class="nx-row" style="justify-content:space-between">
+                <div>
+                  <div>Scanlines</div>
+                  <div class="nx-dim nx-mono" style="font-size:0.75rem">CRT overlay</div>
+                </div>
+                <label class="nx-switch"><input type="checkbox" checked disabled /><span></span></label>
+              </div>
+              <div class="nx-row" style="justify-content:space-between">
+                <div>
+                  <div>Perspective grid</div>
+                  <div class="nx-dim nx-mono" style="font-size:0.75rem">Floor mesh</div>
+                </div>
+                <label class="nx-switch"><input type="checkbox" checked disabled /><span></span></label>
+              </div>
+              <div class="nx-row" style="justify-content:space-between">
+                <div>
+                  <div>Audio UI</div>
+                  <div class="nx-dim nx-mono" style="font-size:0.75rem">Tic al tipear · click HUD</div>
+                </div>
+                <label class="nx-switch"><input type="checkbox" data-nx-audio-toggle /><span></span></label>
+              </div>
+              <div class="nx-field">
+                <label for="nx-vol">Audio volume</label>
+                <input id="nx-vol" class="nx-input" type="range" min="0" max="100" value="35" data-nx-audio-volume />
+              </div>
+              <div class="nx-field">
+                <label for="nx-audio-test">Probar tic (escribe aquí)</label>
+                <input id="nx-audio-test" class="nx-input" type="text" placeholder="type type type…" autocomplete="off" />
+              </div>
+            </div>
+          </section>
+
+          <section class="nx-card nx-reveal nx-reveal-delay-4">
+            <h2 class="nx-card-title">Operator profile</h2>
+            <div class="nx-row nx-mt-4" style="align-items:center">
+              <div class="nx-avatar nx-avatar-lg">JH</div>
+              <div>
+                <div class="nx-card-title" style="margin:0">Jhalmar</div>
+                <div class="nx-mono nx-muted" style="font-size:0.8rem">CLEARANCE · LEVEL 9</div>
+              </div>
+            </div>
+            <hr class="nx-divider" />
+            <div class="nx-field nx-mb-4">
+              <label for="callsign">Callsign</label>
+              <input class="nx-input" id="callsign" value="NEXUS-PRIME" />
+            </div>
+            <div class="nx-field">
+              <label for="notes">Mission notes</label>
+              <textarea class="nx-textarea" id="notes" placeholder="Log entries..."></textarea>
+            </div>
+            <div class="nx-card-footer">
+              <span class="nx-badge">Encrypted</span>
+              <button class="nx-btn nx-btn-sm nx-btn-primary" type="button" onclick="NexusUI.toast('Profile saved','success')">Save</button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <nav class="nx-dock" aria-label="Dock principal">
+      <a href="index.html" class="nx-dock-item nx-nav-link">
+        <svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg>
+        Home
+      </a>
+      <a href="dashboard.html" class="nx-dock-item nx-nav-link">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+        Core
+      </a>
+      <a href="systems.html" class="nx-dock-item nx-nav-link">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2.2 2.2M16.8 16.8 19 19M19 5l-2.2 2.2M5 19l2.2-2.2"/></svg>
+        Systems
+      </a>
+      <a href="components.html" class="nx-dock-item nx-nav-link">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+        Kit
+      </a>
+    </nav>
+  </div>
+  <script src="../js/nexus.js"></script>
+</body>
+</html>

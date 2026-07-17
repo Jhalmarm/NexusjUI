@@ -1,0 +1,273 @@
+/* ==========================================================================
+   NEXUS UI — Ambient Effects (scanlines, grid, glass, glow, noise)
+   ========================================================================== */
+
+/* —— Glass —— */
+.nx-glass {
+  background: var(--nx-bg-glass);
+  border: 1px solid var(--nx-border);
+  backdrop-filter: blur(var(--nx-blur-md)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--nx-blur-md)) saturate(140%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+.nx-glass-strong {
+  background: color-mix(in srgb, var(--nx-bg-panel) 88%, transparent);
+  border: 1px solid var(--nx-border-strong);
+  backdrop-filter: blur(var(--nx-blur-lg)) saturate(160%);
+  -webkit-backdrop-filter: blur(var(--nx-blur-lg)) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    var(--nx-glow-sm),
+    0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* —— Glow helpers —— */
+.nx-glow { box-shadow: var(--nx-glow-md); }
+.nx-glow-sm { box-shadow: var(--nx-glow-sm); }
+.nx-glow-text { text-shadow: var(--nx-glow-sm); }
+.nx-glow-border {
+  border-color: var(--nx-border-strong);
+  box-shadow: var(--nx-glow-sm), inset 0 0 20px color-mix(in srgb, var(--nx-accent) 8%, transparent);
+}
+
+/* —— HUD frame corners —— */
+.nx-frame {
+  position: relative;
+  border: 1px solid var(--nx-border);
+  border-radius: var(--nx-radius-md);
+  background: var(--nx-bg-panel);
+  backdrop-filter: blur(var(--nx-blur-md));
+  -webkit-backdrop-filter: blur(var(--nx-blur-md));
+}
+
+.nx-frame::before,
+.nx-frame::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  border-color: var(--nx-accent);
+  border-style: solid;
+  opacity: 0.85;
+}
+
+.nx-frame::before {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+  border-radius: 4px 0 0 0;
+  box-shadow: -2px -2px 10px color-mix(in srgb, var(--nx-accent) 40%, transparent);
+}
+
+.nx-frame::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 2px 2px 0;
+  border-radius: 0 0 4px 0;
+  box-shadow: 2px 2px 10px color-mix(in srgb, var(--nx-accent) 40%, transparent);
+}
+
+.nx-frame-corners {
+  position: relative;
+}
+
+.nx-frame-corners::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    linear-gradient(var(--nx-accent), var(--nx-accent)) top left / 16px 2px no-repeat,
+    linear-gradient(var(--nx-accent), var(--nx-accent)) top left / 2px 16px no-repeat,
+    linear-gradient(var(--nx-accent), var(--nx-accent)) top right / 16px 2px no-repeat,
+    linear-gradient(var(--nx-accent), var(--nx-accent)) top right / 2px 16px no-repeat,
+    linear-gradient(var(--nx-accent), var(--nx-accent)) bottom left / 16px 2px no-repeat,
+    linear-gradient(var(--nx-accent), var(--nx-accent)) bottom left / 2px 16px no-repeat,
+    linear-gradient(var(--nx-accent), var(--nx-accent)) bottom right / 16px 2px no-repeat,
+    linear-gradient(var(--nx-accent), var(--nx-accent)) bottom right / 2px 16px no-repeat;
+  opacity: 0.7;
+}
+
+/* —— Scanlines overlay —— */
+body[data-nx-fx~="scanlines"]::after,
+.nx-scanlines::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--nx-z-overlay) - 1);
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.12) 2px,
+    rgba(0, 0, 0, 0.12) 4px
+  );
+  opacity: 0.28;
+  mix-blend-mode: multiply;
+}
+
+/* —— Perspective grid floor —— */
+body[data-nx-fx~="grid"] .nx-app::before,
+.nx-grid-floor::before {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 45vh;
+  z-index: var(--nx-z-bg);
+  pointer-events: none;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--nx-accent) 18%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--nx-accent) 18%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  transform: perspective(500px) rotateX(58deg) scale(1.4);
+  transform-origin: center bottom;
+  mask-image: linear-gradient(to top, rgba(0,0,0,0.55), transparent 85%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.55), transparent 85%);
+  opacity: 0.55;
+}
+
+/* —— Noise texture —— */
+body[data-nx-fx~="noise"] .nx-app::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--nx-z-bg) + 1);
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* —— Floating particle canvas host —— */
+#nx-particles {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--nx-z-bg) + 2);
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+/* —— Pulse ring —— */
+.nx-pulse {
+  position: relative;
+}
+
+.nx-pulse::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  border: 1px solid color-mix(in srgb, var(--nx-accent) 50%, transparent);
+  animation: nx-pulse-ring 2.2s var(--nx-ease) infinite;
+  pointer-events: none;
+}
+
+@keyframes nx-pulse-ring {
+  0% { transform: scale(1); opacity: 0.7; }
+  70% { transform: scale(1.08); opacity: 0; }
+  100% { transform: scale(1.08); opacity: 0; }
+}
+
+/* —— Status live dot —— */
+.nx-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--nx-font-mono);
+  font-size: var(--nx-text-xs);
+  letter-spacing: var(--nx-tracking-wide);
+  color: var(--nx-success);
+  text-transform: uppercase;
+}
+
+.nx-live::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--nx-success);
+  box-shadow: 0 0 10px var(--nx-success);
+  animation: nx-blink 1.4s ease-in-out infinite;
+}
+
+@keyframes nx-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* —— Holo shimmer on hover —— */
+.nx-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.nx-shimmer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 25%,
+    color-mix(in srgb, var(--nx-accent) 18%, transparent) 45%,
+    transparent 65%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.7s var(--nx-ease);
+  pointer-events: none;
+}
+
+.nx-shimmer:hover::before {
+  transform: translateX(120%);
+}
+
+/* —— Soft float animation —— */
+.nx-float-y {
+  animation: nx-float-y 5s ease-in-out infinite;
+}
+
+@keyframes nx-float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* —— Gradient border shell —— */
+.nx-border-glow {
+  position: relative;
+  background: var(--nx-bg-panel);
+  border-radius: var(--nx-radius-md);
+  isolation: isolate;
+}
+
+.nx-border-glow::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--nx-accent) 80%, transparent),
+    transparent 40%,
+    color-mix(in srgb, var(--nx-accent-2) 70%, transparent)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.85;
+}
+
+/* —— Vignette —— */
+body[data-nx-fx~="vignette"] .nx-app {
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.55);
+}

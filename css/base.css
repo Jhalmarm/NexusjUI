@@ -1,0 +1,217 @@
+/* ==========================================================================
+   NEXUS UI — Base / Reset / Typography / Layout
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body.nx-body {
+  font-family: var(--nx-font-sans);
+  font-size: var(--nx-text-base);
+  line-height: var(--nx-leading);
+  color: var(--nx-text);
+  background: var(--nx-bg-deep);
+  overflow-x: hidden;
+  perspective: 1400px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.nx-body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: var(--nx-z-bg);
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, color-mix(in srgb, var(--nx-accent) 18%, transparent), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 100% 100%, color-mix(in srgb, var(--nx-accent-2) 12%, transparent), transparent 50%),
+    radial-gradient(ellipse 40% 30% at 0% 80%, color-mix(in srgb, var(--nx-accent-3) 10%, transparent), transparent 45%),
+    linear-gradient(180deg, var(--nx-bg-deep) 0%, var(--nx-bg) 50%, var(--nx-bg-deep) 100%);
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--nx-accent);
+  text-decoration: none;
+  transition: color var(--nx-dur-fast) var(--nx-ease), text-shadow var(--nx-dur-fast) var(--nx-ease);
+}
+
+a:hover {
+  color: color-mix(in srgb, var(--nx-accent) 80%, white);
+  text-shadow: var(--nx-glow-sm);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 var(--nx-space-3);
+  font-family: var(--nx-font-display);
+  font-weight: 600;
+  letter-spacing: var(--nx-tracking-wide);
+  line-height: 1.2;
+  color: var(--nx-text);
+}
+
+.nx-h1, h1.nx-title { font-size: clamp(1.8rem, 4vw, var(--nx-text-4xl)); }
+.nx-h2, h2.nx-title { font-size: clamp(1.4rem, 3vw, var(--nx-text-3xl)); }
+.nx-h3, h3.nx-title { font-size: clamp(1.15rem, 2.2vw, var(--nx-text-2xl)); }
+.nx-h4 { font-size: var(--nx-text-xl); }
+
+.nx-display {
+  font-family: var(--nx-font-display);
+  font-weight: 700;
+  letter-spacing: var(--nx-tracking-wider);
+  text-transform: uppercase;
+  background: linear-gradient(120deg, var(--nx-text) 0%, var(--nx-accent) 45%, var(--nx-accent-2) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 18px color-mix(in srgb, var(--nx-accent) 40%, transparent));
+}
+
+.nx-mono { font-family: var(--nx-font-mono); }
+.nx-muted { color: var(--nx-text-muted); }
+.nx-dim { color: var(--nx-text-dim); }
+.nx-accent { color: var(--nx-accent); }
+.nx-uppercase { text-transform: uppercase; letter-spacing: var(--nx-tracking-wider); }
+.nx-label {
+  font-family: var(--nx-font-mono);
+  font-size: var(--nx-text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--nx-tracking-wider);
+  color: var(--nx-text-muted);
+}
+
+p { margin: 0 0 var(--nx-space-4); }
+p:last-child { margin-bottom: 0; }
+
+/* —— Layout —— */
+.nx-app {
+  position: relative;
+  z-index: var(--nx-z-content);
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.nx-container {
+  width: min(100% - 2rem, var(--nx-container));
+  margin-inline: auto;
+}
+
+.nx-container-wide {
+  width: min(100% - 2rem, 1400px);
+  margin-inline: auto;
+}
+
+.nx-section {
+  padding: var(--nx-space-7) 0;
+}
+
+.nx-section-sm {
+  padding: var(--nx-space-5) 0;
+}
+
+.nx-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nx-space-4);
+}
+
+.nx-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--nx-space-3);
+}
+
+.nx-grid {
+  display: grid;
+  gap: var(--nx-space-5);
+}
+
+.nx-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.nx-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.nx-grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 900px) {
+  .nx-grid-3,
+  .nx-grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .nx-grid-2,
+  .nx-grid-3,
+  .nx-grid-4 { grid-template-columns: 1fr; }
+}
+
+.nx-main {
+  padding: calc(var(--nx-space-6) + 12px) 0 calc(var(--nx-dock-height) + var(--nx-space-7));
+}
+
+.nx-main.has-side-nav {
+  /* Leave room for the fixed side rail so content never sits under it */
+  padding-left: clamp(4.25rem, 6vw, 5.5rem);
+  padding-right: clamp(1rem, 3vw, 2rem);
+}
+
+.nx-spacer { flex: 1; }
+.nx-w-full { width: 100%; }
+.nx-text-center { text-align: center; }
+.nx-mt-0 { margin-top: 0; }
+.nx-mt-2 { margin-top: var(--nx-space-2); }
+.nx-mt-4 { margin-top: var(--nx-space-4); }
+.nx-mt-6 { margin-top: var(--nx-space-6); }
+.nx-mb-2 { margin-bottom: var(--nx-space-2); }
+.nx-mb-4 { margin-bottom: var(--nx-space-4); }
+.nx-mb-6 { margin-bottom: var(--nx-space-6); }
+.nx-gap-2 { gap: var(--nx-space-2); }
+.nx-gap-3 { gap: var(--nx-space-3); }
+.nx-gap-4 { gap: var(--nx-space-4); }
+
+/* —— Page shell for transitions —— */
+.nx-view {
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  will-change: transform, opacity, filter;
+}
+
+/* —— Reduced motion —— */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

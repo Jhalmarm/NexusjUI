@@ -1,0 +1,440 @@
+/* ==========================================================================
+   NEXUS UI — Floating Navigation (dock + orbital side)
+   ========================================================================== */
+
+/* —— Top holographic bar (optional) —— */
+.nx-topbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--nx-z-nav);
+  display: flex;
+  align-items: center;
+  gap: var(--nx-space-4);
+  min-height: var(--nx-nav-height);
+  padding: 0.75rem clamp(1rem, 3vw, 2rem);
+  background: color-mix(in srgb, var(--nx-bg-deep) 55%, transparent);
+  border-bottom: 1px solid var(--nx-border);
+  backdrop-filter: blur(var(--nx-blur-lg)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--nx-blur-lg)) saturate(140%);
+}
+
+.nx-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--nx-font-display);
+  font-weight: 700;
+  letter-spacing: var(--nx-tracking-wider);
+  text-transform: uppercase;
+  color: var(--nx-text);
+  text-decoration: none;
+}
+
+.nx-brand-mark {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--nx-border-strong);
+  background:
+    conic-gradient(from 180deg, var(--nx-accent), var(--nx-accent-2), var(--nx-accent-3), var(--nx-accent));
+  box-shadow: var(--nx-glow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.nx-brand-mark::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 7px;
+  background: var(--nx-bg-deep);
+}
+
+.nx-brand-mark span {
+  position: relative;
+  z-index: 1;
+  font-size: 0.75rem;
+  color: var(--nx-accent);
+  text-shadow: var(--nx-glow-sm);
+}
+
+.nx-brand-text {
+  background: linear-gradient(90deg, var(--nx-text), var(--nx-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* —— Floating bottom dock —— */
+.nx-dock {
+  position: fixed;
+  left: 50%;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: var(--nx-z-nav);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem;
+  border-radius: var(--nx-radius-xl);
+  background: color-mix(in srgb, var(--nx-bg-elevated) 72%, transparent);
+  border: 1px solid var(--nx-border-strong);
+  backdrop-filter: blur(var(--nx-blur-lg)) saturate(160%);
+  -webkit-backdrop-filter: blur(var(--nx-blur-lg)) saturate(160%);
+  box-shadow:
+    var(--nx-glow-sm),
+    0 16px 48px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  animation: nx-dock-enter 0.8s var(--nx-ease-out) both;
+}
+
+@keyframes nx-dock-enter {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(28px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+.nx-dock-item {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  min-width: 64px;
+  height: 56px;
+  padding: 0.35rem 0.6rem;
+  border-radius: var(--nx-radius-lg);
+  border: 1px solid transparent;
+  color: var(--nx-text-muted);
+  text-decoration: none;
+  font-family: var(--nx-font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition:
+    color var(--nx-dur-fast) var(--nx-ease),
+    background var(--nx-dur) var(--nx-ease),
+    border-color var(--nx-dur) var(--nx-ease),
+    box-shadow var(--nx-dur) var(--nx-ease),
+    transform var(--nx-dur) var(--nx-ease);
+}
+
+.nx-dock-item svg,
+.nx-dock-item .nx-dock-icon {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.nx-dock-item:hover {
+  color: var(--nx-text);
+  background: color-mix(in srgb, var(--nx-accent) 10%, transparent);
+  transform: translateY(-4px);
+}
+
+.nx-dock-item.is-active,
+.nx-dock-item[aria-current="page"] {
+  color: var(--nx-accent);
+  background: color-mix(in srgb, var(--nx-accent) 14%, transparent);
+  border-color: color-mix(in srgb, var(--nx-accent) 35%, transparent);
+  box-shadow: var(--nx-glow-sm);
+}
+
+.nx-dock-item.is-active::after,
+.nx-dock-item[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  width: 16px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--nx-accent);
+  box-shadow: 0 0 8px var(--nx-accent);
+}
+
+/* —— Floating side orbital nav ——
+   Vertically centered in the safe band between topbar and bottom dock.
+   Recalculates with 100dvh on resize; scrolls if viewport is too short. */
+.nx-side-nav {
+  --nx-side-inset-top: calc(var(--nx-nav-height) + max(0.5rem, env(safe-area-inset-top, 0px)));
+  --nx-side-inset-bottom: calc(var(--nx-dock-height) + max(1rem, env(safe-area-inset-bottom, 0px)) + 0.75rem);
+  --nx-side-safe-h: calc(100dvh - var(--nx-side-inset-top) - var(--nx-side-inset-bottom));
+
+  position: fixed;
+  z-index: var(--nx-z-nav);
+  left: max(0.75rem, env(safe-area-inset-left, 0px));
+  /* Midpoint of the free band (not full viewport — avoids sitting too low) */
+  top: calc(var(--nx-side-inset-top) + var(--nx-side-safe-h) / 2);
+  translate: 0 -50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  width: auto;
+  height: fit-content;
+  max-height: var(--nx-side-safe-h);
+  margin: 0;
+  padding: 0.55rem;
+  overflow-x: visible;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--nx-accent) 35%, transparent) transparent;
+  border-radius: var(--nx-radius-xl);
+  background: color-mix(in srgb, var(--nx-bg-elevated) 70%, transparent);
+  border: 1px solid var(--nx-border);
+  backdrop-filter: blur(var(--nx-blur-lg));
+  -webkit-backdrop-filter: blur(var(--nx-blur-lg));
+  box-shadow: var(--nx-glow-sm), 0 12px 40px rgba(0, 0, 0, 0.4);
+  animation: nx-side-enter 0.75s var(--nx-ease-out) both;
+}
+
+@keyframes nx-side-enter {
+  from {
+    opacity: 0;
+    translate: -24px -50%;
+  }
+  to {
+    opacity: 1;
+    translate: 0 -50%;
+  }
+}
+
+.nx-side-nav a {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: var(--nx-radius-md);
+  color: var(--nx-text-muted);
+  border: 1px solid transparent;
+  transition:
+    color var(--nx-dur-fast) var(--nx-ease),
+    background var(--nx-dur) var(--nx-ease),
+    border-color var(--nx-dur) var(--nx-ease),
+    box-shadow var(--nx-dur) var(--nx-ease),
+    scale var(--nx-dur) var(--nx-ease);
+}
+
+.nx-side-nav a:hover {
+  color: var(--nx-text);
+  background: color-mix(in srgb, var(--nx-accent) 12%, transparent);
+  scale: 1.06;
+}
+
+.nx-side-nav a.is-active,
+.nx-side-nav a[aria-current="page"] {
+  color: var(--nx-accent);
+  border-color: color-mix(in srgb, var(--nx-accent) 40%, transparent);
+  box-shadow: var(--nx-glow-sm);
+  background: color-mix(in srgb, var(--nx-accent) 14%, transparent);
+}
+
+.nx-side-nav svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Tooltip for side nav */
+.nx-side-nav a[data-tip] {
+  position: relative;
+}
+
+.nx-side-nav a[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 50%;
+  translate: -4px -50%;
+  padding: 0.3rem 0.55rem;
+  border-radius: var(--nx-radius-xs);
+  background: var(--nx-bg-elevated);
+  border: 1px solid var(--nx-border);
+  color: var(--nx-text);
+  font-family: var(--nx-font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--nx-dur-fast) var(--nx-ease), translate var(--nx-dur-fast) var(--nx-ease);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
+
+.nx-side-nav a[data-tip]:hover::after {
+  opacity: 1;
+  translate: 0 -50%;
+}
+
+/* —— Floating action orb —— */
+.nx-fab {
+  position: fixed;
+  right: max(1.25rem, env(safe-area-inset-right));
+  bottom: calc(var(--nx-dock-height) + 1.5rem);
+  z-index: var(--nx-z-float);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid var(--nx-border-strong);
+  background:
+    radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--nx-accent) 55%, white), transparent 55%),
+    linear-gradient(145deg, color-mix(in srgb, var(--nx-accent) 40%, transparent), color-mix(in srgb, var(--nx-accent-2) 35%, transparent));
+  color: var(--nx-text);
+  box-shadow: var(--nx-glow-md), 0 12px 32px rgba(0, 0, 0, 0.4);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform var(--nx-dur) var(--nx-ease), box-shadow var(--nx-dur) var(--nx-ease);
+  animation: nx-float-y 4.5s ease-in-out infinite;
+}
+
+.nx-fab:hover {
+  transform: scale(1.08);
+  box-shadow: var(--nx-glow-lg), 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+
+.nx-fab svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+}
+
+/* —— Breadcrumb HUD —— */
+.nx-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--nx-font-mono);
+  font-size: var(--nx-text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--nx-text-dim);
+  margin-bottom: var(--nx-space-4);
+}
+
+.nx-breadcrumb a {
+  color: var(--nx-text-muted);
+}
+
+.nx-breadcrumb a:hover {
+  color: var(--nx-accent);
+}
+
+.nx-breadcrumb span[aria-current="page"] {
+  color: var(--nx-accent);
+}
+
+.nx-breadcrumb .nx-sep {
+  opacity: 0.4;
+}
+
+/* —— Responsive: compact nav, never hide side rail —— */
+@media (max-width: 900px) {
+  .nx-side-nav {
+    --nx-side-inset-top: calc(var(--nx-nav-height) + 0.35rem);
+    --nx-side-inset-bottom: calc(var(--nx-dock-height) + max(0.75rem, env(safe-area-inset-bottom, 0px)) + 0.5rem);
+    left: max(0.4rem, env(safe-area-inset-left, 0px));
+    padding: 0.4rem;
+    gap: 0.28rem;
+  }
+
+  .nx-side-nav a {
+    width: 40px;
+    height: 40px;
+  }
+
+  .nx-side-nav svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 560px) {
+  .nx-dock {
+    gap: 0.15rem;
+    padding: 0.35rem;
+    width: calc(100% - 1.5rem);
+    max-width: 420px;
+    justify-content: space-around;
+  }
+
+  .nx-dock-item {
+    min-width: 0;
+    flex: 1;
+    height: 52px;
+    font-size: 0;
+    gap: 0;
+  }
+
+  .nx-dock-item svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* Keep side nav visible & re-centered; shrink so it fits short heights */
+  .nx-side-nav {
+    --nx-side-inset-top: max(0.5rem, env(safe-area-inset-top, 0px));
+    --nx-side-inset-bottom: calc(var(--nx-dock-height) + max(0.65rem, env(safe-area-inset-bottom, 0px)) + 0.35rem);
+    left: max(0.35rem, env(safe-area-inset-left, 0px));
+    padding: 0.3rem;
+    gap: 0.2rem;
+    border-radius: var(--nx-radius-lg);
+  }
+
+  .nx-side-nav a {
+    width: 36px;
+    height: 36px;
+  }
+
+  .nx-side-nav svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  /* Tooltips would overflow tiny screens */
+  .nx-side-nav a[data-tip]::after {
+    display: none;
+  }
+
+  .nx-main.has-side-nav {
+    padding-left: 3.25rem;
+  }
+}
+
+/* Very short viewports (laptop half-height, landscape phones) */
+@media (max-height: 520px) {
+  .nx-side-nav {
+    --nx-side-inset-top: max(0.35rem, env(safe-area-inset-top, 0px));
+    --nx-side-inset-bottom: calc(var(--nx-dock-height) + 0.5rem);
+    gap: 0.15rem;
+    padding: 0.28rem;
+  }
+
+  .nx-side-nav a {
+    width: 34px;
+    height: 34px;
+  }
+}

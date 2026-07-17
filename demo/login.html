@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es" data-nx-auto data-nx-transition="portal">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEXUS — Access Gate</title>
+  <link rel="stylesheet" href="../css/nexus.css" />
+  <style>
+    .nx-login-shell {
+      min-height: calc(100dvh - 2rem);
+      display: grid;
+      place-items: center;
+      padding: 2rem 1rem 6rem;
+    }
+    .nx-login-card {
+      width: min(100%, 420px);
+    }
+  </style>
+</head>
+<body data-nx-fx="scanlines grid noise particles vignette" data-nx-audio="on">
+  <div class="nx-app nx-view">
+    <main class="nx-login-shell">
+      <div class="nx-login-card nx-card nx-border-glow nx-frame nx-reveal">
+        <div class="nx-text-center nx-mb-6">
+          <div class="nx-brand" style="justify-content:center;margin-bottom:1rem">
+            <span class="nx-brand-mark"><span>NX</span></span>
+          </div>
+          <p class="nx-label">Secure uplink</p>
+          <h1 class="nx-h3 nx-display" style="margin:0">Access Gate</h1>
+          <p class="nx-muted nx-mt-2" style="font-size:0.9rem">Escribe: cada carácter hace un tic HUD</p>
+        </div>
+
+        <form class="nx-stack" id="nx-login-form" autocomplete="on">
+          <div class="nx-field">
+            <label for="login-user">Operator ID</label>
+            <input class="nx-input" id="login-user" name="username" type="text" placeholder="JH-XXXX" required />
+          </div>
+          <div class="nx-field">
+            <label for="login-pass">Passphrase</label>
+            <input class="nx-input" id="login-pass" name="password" type="password" placeholder="••••••••" required />
+          </div>
+          <div class="nx-field">
+            <label for="login-search">Sector search</label>
+            <input class="nx-input" id="login-search" type="search" placeholder="Filter nodes…" />
+          </div>
+          <div class="nx-row" style="justify-content:space-between">
+            <span class="nx-live">Channel encrypted</span>
+            <label class="nx-row nx-gap-2" style="font-size:0.8rem;color:var(--nx-text-muted)">
+              Audio
+              <span class="nx-switch"><input type="checkbox" data-nx-audio-toggle checked /><span></span></span>
+            </label>
+          </div>
+          <button class="nx-btn nx-btn-primary nx-btn-block nx-btn-lg" type="submit">Authorize</button>
+          <a class="nx-btn nx-btn-ghost nx-btn-block" href="index.html">← Back to demo</a>
+        </form>
+      </div>
+    </main>
+  </div>
+  <script src="../js/nexus.js"></script>
+  <script>
+    document.getElementById("nx-login-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      NexusUI.playSound("confirm");
+      NexusUI.toast("Access granted", "success");
+      setTimeout(() => NexusUI.navigate("dashboard.html", "portal"), 500);
+    });
+  </script>
+</body>
+</html>

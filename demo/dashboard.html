@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es" data-nx-auto>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEXUS — Command Core</title>
+  <link rel="stylesheet" href="../css/nexus.css" />
+</head>
+<body data-nx-fx="scanlines grid noise particles vignette" data-nx-audio="on">
+  <div class="nx-app nx-view">
+    <header class="nx-topbar">
+      <a class="nx-brand" href="index.html">
+        <span class="nx-brand-mark"><span>NX</span></span>
+        <span class="nx-brand-text">Command Core</span>
+      </a>
+      <span class="nx-live">Telemetry active</span>
+      <div class="nx-spacer"></div>
+      <div class="nx-field" style="margin:0;min-width:min(220px,40vw)">
+        <label class="nx-label" for="nx-search" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Search</label>
+        <input class="nx-input" id="nx-search" type="search" placeholder="Scan registry…" autocomplete="off" />
+      </div>
+      <button class="nx-btn nx-btn-sm" type="button" onclick="NexusUI.toast('Sync complete','success')">Sync</button>
+      <div class="nx-avatar" title="Operator">JH</div>
+    </header>
+
+    <nav class="nx-side-nav" aria-label="Navegación lateral">
+      <a href="index.html" data-tip="Inicio" class="nx-nav-link" aria-label="Inicio">
+        <svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg>
+      </a>
+      <a href="dashboard.html" data-tip="Dashboard" class="nx-nav-link" aria-label="Dashboard">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+      </a>
+      <a href="systems.html" data-tip="Sistemas" class="nx-nav-link" aria-label="Sistemas">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2.2 2.2M16.8 16.8 19 19M19 5l-2.2 2.2M5 19l2.2-2.2"/></svg>
+      </a>
+      <a href="components.html" data-tip="Componentes" class="nx-nav-link" aria-label="Componentes">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+      </a>
+    </nav>
+
+    <main class="nx-main has-side-nav">
+      <div class="nx-container-wide">
+        <nav class="nx-breadcrumb nx-reveal">
+          <a href="index.html">Nexus</a>
+          <span class="nx-sep">/</span>
+          <span aria-current="page">Command Core</span>
+        </nav>
+
+        <div class="nx-row nx-mb-6 nx-reveal" style="justify-content:space-between;align-items:flex-end">
+          <div>
+            <p class="nx-label">Operations deck</p>
+            <h1 class="nx-h2 nx-display" style="margin:0">Dashboard orbital</h1>
+          </div>
+          <div class="nx-row">
+            <button class="nx-btn nx-btn-sm nx-btn-ghost" data-nx-set-transition="glitch">Glitch jump</button>
+            <a class="nx-btn nx-btn-sm nx-btn-primary" href="systems.html">Open systems</a>
+          </div>
+        </div>
+
+        <div class="nx-grid nx-grid-4 nx-mb-6">
+          <div class="nx-card nx-stat nx-reveal nx-reveal-delay-1">
+            <span class="nx-stat-label">Uplink nodes</span>
+            <span class="nx-stat-value">128</span>
+            <span class="nx-stat-delta">▲ 12.4% cycle</span>
+          </div>
+          <div class="nx-card nx-stat nx-reveal nx-reveal-delay-2">
+            <span class="nx-stat-label">Latency</span>
+            <span class="nx-stat-value">0.8ms</span>
+            <span class="nx-stat-delta">▲ stable</span>
+          </div>
+          <div class="nx-card nx-stat nx-reveal nx-reveal-delay-3">
+            <span class="nx-stat-label">Energy draw</span>
+            <span class="nx-stat-value">64%</span>
+            <span class="nx-stat-delta is-down">▼ 3.1%</span>
+          </div>
+          <div class="nx-card nx-stat nx-reveal nx-reveal-delay-4">
+            <span class="nx-stat-label">Threat index</span>
+            <span class="nx-stat-value">LOW</span>
+            <span class="nx-stat-delta">shielded</span>
+          </div>
+        </div>
+
+        <div class="nx-grid nx-grid-2">
+          <section class="nx-card nx-frame nx-reveal nx-reveal-delay-2">
+            <div class="nx-card-header">
+              <div>
+                <h2 class="nx-card-title">Flux capacity</h2>
+                <p class="nx-card-subtitle">Reactor load last 6 cycles</p>
+              </div>
+              <span class="nx-badge nx-badge-success">Optimal</span>
+            </div>
+            <div class="nx-stack">
+              <div>
+                <div class="nx-row" style="justify-content:space-between">
+                  <span class="nx-label">Core A</span>
+                  <span class="nx-mono nx-accent">78%</span>
+                </div>
+                <div class="nx-progress" style="--nx-value:78%"><span></span></div>
+              </div>
+              <div>
+                <div class="nx-row" style="justify-content:space-between">
+                  <span class="nx-label">Core B</span>
+                  <span class="nx-mono nx-accent">54%</span>
+                </div>
+                <div class="nx-progress" style="--nx-value:54%"><span></span></div>
+              </div>
+              <div>
+                <div class="nx-row" style="justify-content:space-between">
+                  <span class="nx-label">Coolant</span>
+                  <span class="nx-mono nx-accent">91%</span>
+                </div>
+                <div class="nx-progress" style="--nx-value:91%"><span></span></div>
+              </div>
+              <div>
+                <div class="nx-row" style="justify-content:space-between">
+                  <span class="nx-label">Shield mesh</span>
+                  <span class="nx-mono nx-accent">36%</span>
+                </div>
+                <div class="nx-progress" style="--nx-value:36%"><span></span></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="nx-card nx-reveal nx-reveal-delay-3">
+            <div class="nx-card-header">
+              <div>
+                <h2 class="nx-card-title">Mission feed</h2>
+                <p class="nx-card-subtitle">Event stream · live</p>
+              </div>
+            </div>
+            <div class="nx-stack">
+              <div class="nx-alert nx-alert-info">
+                <div>
+                  <strong class="nx-mono">08:42:11</strong>
+                  <div class="nx-muted">Node cluster rebalanced · sector 7</div>
+                </div>
+              </div>
+              <div class="nx-alert nx-alert-success">
+                <div>
+                  <strong class="nx-mono">08:39:02</strong>
+                  <div class="nx-muted">Auth handshake verified for operator JH</div>
+                </div>
+              </div>
+              <div class="nx-alert nx-alert-warning">
+                <div>
+                  <strong class="nx-mono">08:31:55</strong>
+                  <div class="nx-muted">Coolant pump B latency spike (resolved)</div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <section class="nx-card nx-mt-6 nx-reveal nx-reveal-delay-4">
+          <div class="nx-card-header">
+            <div>
+              <h2 class="nx-card-title">Fleet registry</h2>
+              <p class="nx-card-subtitle">Active vessels in range</p>
+            </div>
+            <button class="nx-btn nx-btn-sm" type="button" data-nx-modal-open="nx-deploy-modal">Deploy unit</button>
+          </div>
+          <div class="nx-table-wrap">
+            <table class="nx-table">
+              <thead>
+                <tr>
+                  <th>Unit</th>
+                  <th>Class</th>
+                  <th>Status</th>
+                  <th>Charge</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="nx-mono">NX-01 ARK</td>
+                  <td>Scout</td>
+                  <td><span class="nx-badge nx-badge-success">Online</span></td>
+                  <td class="nx-mono">98%</td>
+                  <td><a class="nx-btn nx-btn-sm nx-btn-ghost" href="systems.html">Inspect</a></td>
+                </tr>
+                <tr>
+                  <td class="nx-mono">NX-07 VORTEX</td>
+                  <td>Carrier</td>
+                  <td><span class="nx-badge nx-badge-warning">Docked</span></td>
+                  <td class="nx-mono">61%</td>
+                  <td><a class="nx-btn nx-btn-sm nx-btn-ghost" href="systems.html">Inspect</a></td>
+                </tr>
+                <tr>
+                  <td class="nx-mono">NX-12 PHANTOM</td>
+                  <td>Stealth</td>
+                  <td><span class="nx-badge">Cloaked</span></td>
+                  <td class="nx-mono">84%</td>
+                  <td><a class="nx-btn nx-btn-sm nx-btn-ghost" href="systems.html">Inspect</a></td>
+                </tr>
+                <tr>
+                  <td class="nx-mono">NX-03 HELIX</td>
+                  <td>Support</td>
+                  <td><span class="nx-badge nx-badge-danger">Alert</span></td>
+                  <td class="nx-mono">22%</td>
+                  <td><a class="nx-btn nx-btn-sm nx-btn-danger" href="systems.html">Repair</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <nav class="nx-dock" aria-label="Dock principal">
+      <a href="index.html" class="nx-dock-item nx-nav-link">
+        <svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg>
+        Home
+      </a>
+      <a href="dashboard.html" class="nx-dock-item nx-nav-link">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+        Core
+      </a>
+      <a href="systems.html" class="nx-dock-item nx-nav-link">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2.2 2.2M16.8 16.8 19 19M19 5l-2.2 2.2M5 19l2.2-2.2"/></svg>
+        Systems
+      </a>
+      <a href="components.html" class="nx-dock-item nx-nav-link">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+        Kit
+      </a>
+    </nav>
+  </div>
+
+  <div class="nx-modal-backdrop" id="nx-deploy-modal" aria-hidden="true" role="dialog">
+    <div class="nx-modal">
+      <p class="nx-label">Deploy sequence</p>
+      <h2 class="nx-modal-title">Lanzar unidad</h2>
+      <div class="nx-stack">
+        <div class="nx-field">
+          <label for="unit-id">Unit ID</label>
+          <input class="nx-input" id="unit-id" placeholder="NX-XX CODENAME" />
+        </div>
+        <div class="nx-field">
+          <label for="sector">Sector</label>
+          <select class="nx-select" id="sector">
+            <option>Alpha-7</option>
+            <option>Orion Belt</option>
+            <option>Void Rim</option>
+          </select>
+        </div>
+      </div>
+      <div class="nx-modal-actions">
+        <button class="nx-btn nx-btn-ghost" data-nx-modal-close type="button">Abort</button>
+        <button class="nx-btn nx-btn-primary" type="button" data-nx-modal-close onclick="NexusUI.toast('Unit deployed','success')">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/nexus.js"></script>
+</body>
+</html>

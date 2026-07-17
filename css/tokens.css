@@ -1,0 +1,158 @@
+/* ==========================================================================
+   NEXUS UI — Design Tokens (2060 Futuristic System)
+   ========================================================================== */
+
+:root {
+  /* —— Brand / Neon —— */
+  --nx-cyan: #00f0ff;
+  --nx-cyan-dim: #00a8b5;
+  --nx-magenta: #ff2bd6;
+  --nx-violet: #8b5cff;
+  --nx-lime: #b8ff3c;
+  --nx-amber: #ffb020;
+  --nx-red: #ff3b5c;
+  --nx-blue: #3d7eff;
+
+  /* —— Surfaces —— */
+  --nx-bg-deep: #05060d;
+  --nx-bg: #0a0c16;
+  --nx-bg-elevated: #101322;
+  --nx-bg-panel: rgba(14, 18, 36, 0.72);
+  --nx-bg-glass: rgba(18, 24, 48, 0.45);
+  --nx-bg-input: rgba(8, 12, 28, 0.75);
+
+  /* —— Text —— */
+  --nx-text: #e8f0ff;
+  --nx-text-muted: #8b9bb8;
+  --nx-text-dim: #5a6a88;
+  --nx-text-inverse: #05060d;
+
+  /* —— Borders / Glow —— */
+  --nx-border: rgba(0, 240, 255, 0.18);
+  --nx-border-strong: rgba(0, 240, 255, 0.45);
+  --nx-glow-sm: 0 0 12px rgba(0, 240, 255, 0.35);
+  --nx-glow-md: 0 0 24px rgba(0, 240, 255, 0.4), 0 0 48px rgba(0, 240, 255, 0.15);
+  --nx-glow-lg: 0 0 32px rgba(0, 240, 255, 0.5), 0 0 80px rgba(0, 240, 255, 0.2);
+  --nx-glow-magenta: 0 0 20px rgba(255, 43, 214, 0.45);
+
+  /* —— Radius —— */
+  --nx-radius-xs: 4px;
+  --nx-radius-sm: 8px;
+  --nx-radius-md: 14px;
+  --nx-radius-lg: 22px;
+  --nx-radius-xl: 32px;
+  --nx-radius-full: 9999px;
+
+  /* —— Spacing —— */
+  --nx-space-1: 0.25rem;
+  --nx-space-2: 0.5rem;
+  --nx-space-3: 0.75rem;
+  --nx-space-4: 1rem;
+  --nx-space-5: 1.5rem;
+  --nx-space-6: 2rem;
+  --nx-space-7: 3rem;
+  --nx-space-8: 4rem;
+
+  /* —— Typography —— */
+  --nx-font-sans: "Segoe UI", "Inter", system-ui, -apple-system, sans-serif;
+  --nx-font-display: "Orbitron", "Segoe UI", system-ui, sans-serif;
+  --nx-font-mono: "JetBrains Mono", "SF Mono", "Fira Code", ui-monospace, monospace;
+  --nx-text-xs: 0.75rem;
+  --nx-text-sm: 0.875rem;
+  --nx-text-base: 1rem;
+  --nx-text-lg: 1.125rem;
+  --nx-text-xl: 1.35rem;
+  --nx-text-2xl: 1.75rem;
+  --nx-text-3xl: 2.25rem;
+  --nx-text-4xl: 3rem;
+  --nx-leading: 1.55;
+  --nx-tracking-wide: 0.08em;
+  --nx-tracking-wider: 0.16em;
+
+  /* —— Motion —— */
+  --nx-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --nx-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --nx-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --nx-dur-fast: 150ms;
+  --nx-dur: 320ms;
+  --nx-dur-slow: 620ms;
+  --nx-dur-scene: 900ms;
+
+  /* —— Layout —— */
+  --nx-container: 1180px;
+  --nx-nav-height: 72px;
+  --nx-dock-height: 68px;
+  --nx-z-bg: 0;
+  --nx-z-content: 10;
+  --nx-z-float: 100;
+  --nx-z-nav: 200;
+  --nx-z-modal: 300;
+  --nx-z-toast: 400;
+  --nx-z-overlay: 500;
+
+  /* —— Blur —— */
+  --nx-blur-sm: 8px;
+  --nx-blur-md: 16px;
+  --nx-blur-lg: 28px;
+
+  /* —— Accent aliases (theme-swappable) —— */
+  --nx-accent: var(--nx-cyan);
+  --nx-accent-2: var(--nx-magenta);
+  --nx-accent-3: var(--nx-violet);
+  --nx-success: var(--nx-lime);
+  --nx-warning: var(--nx-amber);
+  --nx-danger: var(--nx-red);
+  --nx-info: var(--nx-blue);
+}
+
+/* Theme: Void Purple */
+[data-nx-theme="void"] {
+  --nx-accent: #c084fc;
+  --nx-accent-2: #f472b6;
+  --nx-accent-3: #818cf8;
+  --nx-border: rgba(192, 132, 252, 0.2);
+  --nx-border-strong: rgba(192, 132, 252, 0.5);
+  --nx-glow-sm: 0 0 12px rgba(192, 132, 252, 0.35);
+  --nx-glow-md: 0 0 24px rgba(192, 132, 252, 0.4), 0 0 48px rgba(192, 132, 252, 0.15);
+  --nx-glow-lg: 0 0 32px rgba(192, 132, 252, 0.5), 0 0 80px rgba(192, 132, 252, 0.2);
+  --nx-bg-deep: #07050f;
+  --nx-bg: #0c0818;
+  --nx-bg-elevated: #140e24;
+  --nx-bg-panel: rgba(20, 12, 40, 0.72);
+  --nx-bg-glass: rgba(28, 16, 52, 0.45);
+}
+
+/* Theme: Ice */
+[data-nx-theme="ice"] {
+  --nx-accent: #7dd3fc;
+  --nx-accent-2: #a5f3fc;
+  --nx-accent-3: #e0f2fe;
+  --nx-border: rgba(125, 211, 252, 0.22);
+  --nx-border-strong: rgba(125, 211, 252, 0.5);
+  --nx-glow-sm: 0 0 12px rgba(125, 211, 252, 0.35);
+  --nx-glow-md: 0 0 24px rgba(125, 211, 252, 0.35), 0 0 48px rgba(224, 242, 254, 0.12);
+  --nx-glow-lg: 0 0 32px rgba(125, 211, 252, 0.45), 0 0 80px rgba(224, 242, 254, 0.15);
+  --nx-bg-deep: #04080f;
+  --nx-bg: #071018;
+  --nx-bg-elevated: #0c1824;
+  --nx-bg-panel: rgba(10, 24, 36, 0.72);
+  --nx-bg-glass: rgba(14, 30, 46, 0.45);
+  --nx-text: #f0f9ff;
+}
+
+/* Theme: Ember */
+[data-nx-theme="ember"] {
+  --nx-accent: #fb923c;
+  --nx-accent-2: #f43f5e;
+  --nx-accent-3: #fbbf24;
+  --nx-border: rgba(251, 146, 60, 0.22);
+  --nx-border-strong: rgba(251, 146, 60, 0.5);
+  --nx-glow-sm: 0 0 12px rgba(251, 146, 60, 0.35);
+  --nx-glow-md: 0 0 24px rgba(251, 146, 60, 0.4), 0 0 48px rgba(244, 63, 94, 0.15);
+  --nx-glow-lg: 0 0 32px rgba(251, 146, 60, 0.5), 0 0 80px rgba(244, 63, 94, 0.18);
+  --nx-bg-deep: #0c0606;
+  --nx-bg: #140a0a;
+  --nx-bg-elevated: #1f1010;
+  --nx-bg-panel: rgba(36, 14, 14, 0.72);
+  --nx-bg-glass: rgba(48, 18, 18, 0.45);
+}

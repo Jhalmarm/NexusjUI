@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es" data-nx-auto data-nx-transition="portal">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEXUS UI — Sistema 2060</title>
+  <meta name="description" content="Librería de UI futurista drop-in: menús flotantes, transiciones 3D, look de película." />
+  <link rel="stylesheet" href="../css/nexus.css" />
+</head>
+<body data-nx-fx="scanlines grid noise particles vignette" data-nx-audio="on">
+  <div class="nx-app nx-view">
+    <header class="nx-topbar">
+      <a class="nx-brand" href="index.html">
+        <span class="nx-brand-mark"><span>NX</span></span>
+        <span class="nx-brand-text">Nexus UI</span>
+      </a>
+      <span class="nx-live">Neural link online</span>
+      <div class="nx-spacer"></div>
+      <div class="nx-row nx-gap-2">
+        <button class="nx-btn nx-btn-sm nx-btn-ghost" data-nx-set-theme="cyber">Cyber</button>
+        <button class="nx-btn nx-btn-sm nx-btn-ghost" data-nx-set-theme="void">Void</button>
+        <button class="nx-btn nx-btn-sm nx-btn-ghost" data-nx-set-theme="ice">Ice</button>
+        <button class="nx-btn nx-btn-sm nx-btn-ghost" data-nx-set-theme="ember">Ember</button>
+      </div>
+    </header>
+
+    <nav class="nx-side-nav" aria-label="Navegación lateral">
+      <a href="index.html" data-tip="Inicio" class="nx-nav-link" aria-label="Inicio">
+        <svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg>
+      </a>
+      <a href="dashboard.html" data-tip="Dashboard" class="nx-nav-link" aria-label="Dashboard">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+      </a>
+      <a href="systems.html" data-tip="Sistemas" class="nx-nav-link" aria-label="Sistemas">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2.2 2.2M16.8 16.8 19 19M19 5l-2.2 2.2M5 19l2.2-2.2"/></svg>
+      </a>
+      <a href="components.html" data-tip="Componentes" class="nx-nav-link" aria-label="Componentes">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/><circle cx="18" cy="17" r="2"/></svg>
+      </a>
+    </nav>
+
+    <main class="nx-main has-side-nav">
+      <div class="nx-container">
+        <section class="nx-hero nx-reveal">
+          <div class="nx-hero-kicker">v0.1 · Drop-in UI Kit · Year 2060</div>
+          <h1 class="nx-display">Interfaces que parecen<br/>de otra década</h1>
+          <p class="nx-mt-4">
+            NEXUS es tu Bootstrap del futuro: menús flotantes, paneles holográficos
+            y transiciones 3D entre pantallas. Enchúfalo a cualquier sistema.
+          </p>
+          <div class="nx-row nx-gap-3" style="justify-content:center;margin-top:1.75rem">
+            <a class="nx-btn nx-btn-primary nx-btn-lg" href="dashboard.html" data-nx-transition="portal">
+              Entrar al core
+            </a>
+            <a class="nx-btn nx-btn-lg" href="login.html" data-nx-transition="glitch">
+              Access Gate
+            </a>
+            <a class="nx-btn nx-btn-lg nx-btn-ghost" href="media.html" data-nx-transition="cube">
+              Media / Video
+            </a>
+          </div>
+          <div class="nx-field nx-mt-6" style="max-width:420px;margin-inline:auto">
+            <label for="hero-search">Probar audio · búsqueda</label>
+            <input class="nx-input" id="hero-search" type="search" placeholder="Escribe aquí y escucha el tic…" autocomplete="off" />
+          </div>
+        </section>
+
+        <section class="nx-section-sm">
+          <div class="nx-card nx-border-glow nx-reveal nx-reveal-delay-1">
+            <div class="nx-card-header">
+              <div>
+                <p class="nx-label">Scene engine</p>
+                <h2 class="nx-card-title">Transiciones cinematográficas</h2>
+                <p class="nx-card-subtitle">Elige el efecto y navega entre páginas</p>
+              </div>
+              <span class="nx-badge">Live</span>
+            </div>
+            <div class="nx-transition-picker" role="group" aria-label="Tipo de transición">
+              <button type="button" data-nx-set-transition="portal">Portal</button>
+              <button type="button" data-nx-set-transition="fade-depth">Fade Depth</button>
+              <button type="button" data-nx-set-transition="cube">Cube 3D</button>
+              <button type="button" data-nx-set-transition="flip">Flip</button>
+              <button type="button" data-nx-set-transition="glitch">Glitch</button>
+            </div>
+            <div class="nx-row nx-mt-4 nx-gap-3">
+              <a class="nx-btn nx-btn-sm" href="dashboard.html">Probar → Dashboard</a>
+              <a class="nx-btn nx-btn-sm nx-btn-ghost" href="systems.html">Probar → Systems</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="nx-section-sm">
+          <div class="nx-grid nx-grid-3">
+            <article class="nx-card nx-card-float nx-shimmer nx-tilt nx-reveal nx-reveal-delay-2">
+              <span class="nx-badge nx-mb-4">01</span>
+              <h3 class="nx-card-title">Menús flotantes</h3>
+              <p class="nx-card-body">Dock inferior + nav orbital lateral con tooltips holográficos. Siempre accesible, nunca estorba.</p>
+            </article>
+            <article class="nx-card nx-card-float nx-shimmer nx-tilt nx-reveal nx-reveal-delay-3">
+              <span class="nx-badge nx-badge-magenta nx-mb-4">02</span>
+              <h3 class="nx-card-title">Motion 3D</h3>
+              <p class="nx-card-body">Portal, cube, flip, glitch y fade-depth. View Transitions API con fallback animado.</p>
+            </article>
+            <article class="nx-card nx-card-float nx-shimmer nx-tilt nx-reveal nx-reveal-delay-4">
+              <span class="nx-badge nx-badge-success nx-mb-4">03</span>
+              <h3 class="nx-card-title">Drop-in total</h3>
+              <p class="nx-card-body">HTML + CSS + JS. Sirve en Laravel, Django, React (CDN), o un index.html plano.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="nx-section-sm nx-reveal nx-reveal-delay-5">
+          <div class="nx-card nx-frame">
+            <p class="nx-label nx-mb-2">Instalación en 10 segundos</p>
+            <pre class="nx-code"><span class="nx-dim">&lt;!-- en tu HTML --&gt;</span>
+&lt;link rel="stylesheet" href="nexus-ui/css/nexus.css"&gt;
+&lt;body class="nx-body" data-nx-fx="scanlines particles" data-nx-auto&gt;
+  ...
+  &lt;script src="nexus-ui/js/nexus.js"&gt;&lt;/script&gt;
+&lt;/body&gt;</pre>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <nav class="nx-dock" aria-label="Dock principal">
+      <a href="index.html" class="nx-dock-item nx-nav-link">
+        <svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg>
+        Home
+      </a>
+      <a href="dashboard.html" class="nx-dock-item nx-nav-link">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+        Core
+      </a>
+      <a href="systems.html" class="nx-dock-item nx-nav-link">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2.2 2.2M16.8 16.8 19 19M19 5l-2.2 2.2M5 19l2.2-2.2"/></svg>
+        Systems
+      </a>
+      <a href="components.html" class="nx-dock-item nx-nav-link">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+        Kit
+      </a>
+    </nav>
+
+    <button class="nx-fab" type="button" data-nx-modal-open="nx-welcome-modal" aria-label="Acción rápida">
+      <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+    </button>
+  </div>
+
+  <div class="nx-modal-backdrop" id="nx-welcome-modal" aria-hidden="true" role="dialog" aria-labelledby="nx-modal-title">
+    <div class="nx-modal">
+      <p class="nx-label">Protocolo de acceso</p>
+      <h2 class="nx-modal-title" id="nx-modal-title">Bienvenido a NEXUS</h2>
+      <p class="nx-muted">
+        Esta es la primera versión de tu librería futurista. Navega entre páginas
+        para sentir las transiciones 3D. Cambia tema y tipo de escena desde el panel principal.
+      </p>
+      <div class="nx-modal-actions">
+        <button class="nx-btn nx-btn-ghost" data-nx-modal-close type="button">Cerrar</button>
+        <a class="nx-btn nx-btn-primary" href="dashboard.html">Iniciar secuencia</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/nexus.js"></script>
+  <script>
+    // Auto-init via data-nx-auto; extra demo toast
+    document.addEventListener("nx:ready", () => {
+      setTimeout(() => NexusUI.toast("NEXUS link established", "success"), 600);
+    });
+  </script>
+</body>
+</html>

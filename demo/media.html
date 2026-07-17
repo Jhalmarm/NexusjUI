@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es" data-nx-auto>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEXUS — Media Deck</title>
+  <link rel="stylesheet" href="../css/nexus.css" />
+</head>
+<body data-nx-fx="scanlines grid noise particles vignette" data-nx-audio="on">
+  <div class="nx-app nx-view">
+    <header class="nx-topbar">
+      <a class="nx-brand" href="index.html">
+        <span class="nx-brand-mark"><span>NX</span></span>
+        <span class="nx-brand-text">Media Deck</span>
+      </a>
+      <span class="nx-live">Stream ready</span>
+      <div class="nx-spacer"></div>
+      <button
+        class="nx-btn nx-btn-sm nx-btn-primary"
+        type="button"
+        data-nx-video
+        data-nx-src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+        data-nx-title="Quick local"
+      >
+        Quick play
+      </button>
+    </header>
+
+    <nav class="nx-side-nav" aria-label="Navegación lateral">
+      <a href="index.html" data-tip="Inicio" class="nx-nav-link" aria-label="Inicio">
+        <svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg>
+      </a>
+      <a href="dashboard.html" data-tip="Dashboard" class="nx-nav-link" aria-label="Dashboard">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+      </a>
+      <a href="media.html" data-tip="Media" class="nx-nav-link" aria-label="Media">
+        <svg viewBox="0 0 24 24"><path d="M5 5h14v14H5z"/><path d="m10 9 6 3-6 3V9z"/></svg>
+      </a>
+      <a href="components.html" data-tip="Componentes" class="nx-nav-link" aria-label="Componentes">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+      </a>
+    </nav>
+
+    <main class="nx-main has-side-nav">
+      <div class="nx-container">
+        <nav class="nx-breadcrumb nx-reveal">
+          <a href="index.html">Nexus</a>
+          <span class="nx-sep">/</span>
+          <span aria-current="page">Media</span>
+        </nav>
+
+        <div class="nx-reveal nx-mb-6">
+          <p class="nx-label">Holographic projector</p>
+          <h1 class="nx-h2 nx-display" style="margin:0">Video flotante</h1>
+          <p class="nx-muted nx-mt-2">
+            Reproduce archivos locales o embeds. El player flota con vidrio semitransparente;
+            arrástralo, minimízalo o expándelo.
+          </p>
+        </div>
+
+        <div class="nx-grid nx-grid-3 nx-mb-6">
+          <button
+            type="button"
+            class="nx-video nx-video-glass nx-video-card nx-reveal"
+            data-nx-video
+            data-nx-src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+            data-nx-title="Local MP4"
+            data-nx-type="local"
+            style="text-align:left;padding:0;cursor:pointer;font:inherit;color:inherit;background:inherit"
+          >
+            <div class="nx-video-frame">
+              <div class="nx-video-poster"><span class="nx-mono">MP4 local</span></div>
+              <div class="nx-video-play"><span>▶</span></div>
+              <div class="nx-video-hud"></div>
+            </div>
+            <div class="nx-video-meta">
+              <div>
+                <p class="nx-video-title">Flower · sample</p>
+                <p class="nx-video-sub">Archivo directo</p>
+              </div>
+              <span class="nx-badge">Local</span>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            class="nx-video nx-video-glass nx-video-card nx-reveal nx-reveal-delay-1"
+            data-nx-video
+            data-nx-src="https://www.youtube.com/watch?v=M7lc1UVf-VE"
+            data-nx-title="YouTube embed"
+            data-nx-type="embed"
+            style="text-align:left;padding:0;cursor:pointer;font:inherit;color:inherit;background:inherit"
+          >
+            <div class="nx-video-frame">
+              <div class="nx-video-poster"><span class="nx-mono">YouTube</span></div>
+              <div class="nx-video-play"><span>▶</span></div>
+              <div class="nx-video-hud"></div>
+            </div>
+            <div class="nx-video-meta">
+              <div>
+                <p class="nx-video-title">YouTube uplink</p>
+                <p class="nx-video-sub">watch → embed</p>
+              </div>
+              <span class="nx-badge nx-badge-magenta">Embed</span>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            class="nx-video nx-video-glass nx-video-card nx-reveal nx-reveal-delay-2"
+            data-nx-video
+            data-nx-src="https://vimeo.com/148751763"
+            data-nx-title="Vimeo feed"
+            data-nx-type="embed"
+            style="text-align:left;padding:0;cursor:pointer;font:inherit;color:inherit;background:inherit"
+          >
+            <div class="nx-video-frame">
+              <div class="nx-video-poster"><span class="nx-mono">Vimeo</span></div>
+              <div class="nx-video-play"><span>▶</span></div>
+              <div class="nx-video-hud"></div>
+            </div>
+            <div class="nx-video-meta">
+              <div>
+                <p class="nx-video-title">Vimeo channel</p>
+                <p class="nx-video-sub">player.vimeo</p>
+              </div>
+              <span class="nx-badge nx-badge-warning">Embed</span>
+            </div>
+          </button>
+        </div>
+
+        <section class="nx-card nx-border-glow nx-reveal nx-reveal-delay-3">
+          <h2 class="nx-card-title">Proyectar URL personalizada</h2>
+          <p class="nx-card-subtitle nx-mb-4">Pega un .mp4 local/remoto o un link de YouTube / Vimeo</p>
+          <div class="nx-stack">
+            <div class="nx-field">
+              <label for="media-url">Source URL</label>
+              <input
+                class="nx-input"
+                id="media-url"
+                type="url"
+                placeholder="https://…/video.mp4  o  https://youtube.com/watch?v=…"
+              />
+            </div>
+            <div class="nx-field">
+              <label for="media-title">Title</label>
+              <input class="nx-input" id="media-title" type="text" placeholder="Mission brief" value="Custom stream" />
+            </div>
+            <div class="nx-row">
+              <button class="nx-btn nx-btn-primary" type="button" id="media-play">Abrir flotante</button>
+              <button class="nx-btn" type="button" id="media-play-max">Abrir maximizado</button>
+              <button class="nx-btn nx-btn-ghost" type="button" onclick="NexusUI.closeVideo()">Cerrar</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="nx-section-sm nx-reveal">
+          <div class="nx-video nx-video-glass">
+            <div class="nx-video-frame">
+              <video
+                controls
+                playsinline
+                preload="metadata"
+                src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm"
+              ></video>
+              <div class="nx-video-hud"></div>
+            </div>
+            <div class="nx-video-meta">
+              <div>
+                <p class="nx-video-title">Inline glass player</p>
+                <p class="nx-video-sub">Embebido en el layout · no flotante</p>
+              </div>
+              <span class="nx-badge nx-badge-success">In-page</span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <nav class="nx-dock" aria-label="Dock principal">
+      <a href="index.html" class="nx-dock-item nx-nav-link">
+        <svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg>
+        Home
+      </a>
+      <a href="dashboard.html" class="nx-dock-item nx-nav-link">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+        Core
+      </a>
+      <a href="media.html" class="nx-dock-item nx-nav-link">
+        <svg viewBox="0 0 24 24"><path d="M5 5h14v14H5z"/><path d="m10 9 6 3-6 3V9z"/></svg>
+        Media
+      </a>
+      <a href="components.html" class="nx-dock-item nx-nav-link">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+        Kit
+      </a>
+    </nav>
+  </div>
+
+  <script src="../js/nexus.js"></script>
+  <script>
+    document.getElementById("media-play").addEventListener("click", () => {
+      const src = document.getElementById("media-url").value.trim();
+      const title = document.getElementById("media-title").value.trim() || "Custom stream";
+      if (!src) {
+        NexusUI.toast("Pega una URL primero", "warning");
+        return;
+      }
+      NexusUI.openVideo({ src, title });
+    });
+    document.getElementById("media-play-max").addEventListener("click", () => {
+      const src = document.getElementById("media-url").value.trim();
+      const title = document.getElementById("media-title").value.trim() || "Custom stream";
+      if (!src) {
+        NexusUI.toast("Pega una URL primero", "warning");
+        return;
+      }
+      NexusUI.openVideo({ src, title, maximized: true });
+    });
+  </script>
+</body>
+</html>

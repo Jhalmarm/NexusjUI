@@ -1,0 +1,12 @@
+/* ==========================================================================
+   NEXUS UI — Main entry (import this one file)
+   Drop-in futuristic UI system · style 2060
+   ========================================================================== */
+
+@import "./tokens.css";
+@import "./base.css";
+@import "./effects.css";
+@import "./components.css";
+@import "./nav.css";
+@import "./motion.css";
+@import "./video.css";
